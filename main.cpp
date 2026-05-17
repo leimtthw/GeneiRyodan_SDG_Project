@@ -305,6 +305,12 @@ int main() {
         }
         case 10: { // Final Exit
             displaySummaryReport(session);
+            if (db.isConnected()) {
+                std::cout << "System Exit: Data is safely preserved in the database." << std::endl;
+            }
+            else {
+                std::cout << "System Exit: Offline Mode. In-memory data was not persisted." << std::endl;
+            }
             break;
             }
         }
