@@ -320,6 +320,7 @@ bool DatabaseManager::updateDailyRecord(int id, float temp, float rainfall, floa
 }
 
 bool DatabaseManager::deleteRecord(int id) {
+     if (con == nullptr) return false;
     try {
         sql::PreparedStatement* pstmt = con->prepareStatement("DELETE FROM daily_records WHERE id = ?");
         pstmt->setInt(1, id);
@@ -330,6 +331,7 @@ bool DatabaseManager::deleteRecord(int id) {
         return true;
     }
     catch (sql::SQLException& e) {
+        std::cout << "Database Delete Error: " << e.what() << std::endl;
         return false;
     }
 }
